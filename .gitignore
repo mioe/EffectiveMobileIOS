@@ -1,0 +1,20 @@
+# xcode
+xcuserdata/
+*.xcscmblueprint
+*.xccheckout
+.build/
+
+# app packaging
+*.ipa
+*.dSYM.zip
+*.dSYM
+
+# playgrounds
+timeline.xctimeline
+playground.xcworkspace
+
+# macos
+.DS_Store
+.AppleDouble
+.LSOverride
+
