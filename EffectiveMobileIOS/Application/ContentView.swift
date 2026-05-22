@@ -14,9 +14,7 @@ struct ContentView: View {
 			isEnabled: isMenuEnabled,
 			isExpanded: $isExpanded
 		) { progress in
-			VStack {
-				Text("Misha")
-			}
+			AboutMe()
 		} content: { progress in
 			NavigationStack(path: $router.navigationPath) {
 				MainView(onTapAbout: { isExpanded = true })

@@ -1,5 +1,4 @@
 // by mioe
-//
 
 public import CoreData
 public import Foundation

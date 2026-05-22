@@ -37,5 +37,4 @@ class CoreDataManager {
 	var viewContext: NSManagedObjectContext {
 		persistentContainer.viewContext
 	}
-
 }

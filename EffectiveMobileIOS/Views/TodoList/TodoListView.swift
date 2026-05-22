@@ -2,7 +2,7 @@
 
 import SwiftUI
 
-struct MainView: View {
+struct TodoListView: View {
 
 	@Environment(AppRouter.self) private var router
 

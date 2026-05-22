@@ -2,7 +2,7 @@
 
 import SwiftUI
 
-struct TodoView: View {
+struct TodoFormView: View {
 	
 	@Environment(AppRouter.self) private var router
 
