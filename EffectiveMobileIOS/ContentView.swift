@@ -14,14 +14,12 @@ struct ContentView: View {
 			isEnabled: isMenuEnabled,
 			isExpanded: $isExpanded
 		) { progress in
-			HStack {
+			VStack {
 				Text("Misha")
 			}
 		} content: { progress in
 			NavigationStack(path: $router.navigationPath) {
-				MainView()
-				.navigationTitle("Application")
-				.navigationBarTitleDisplayMode(.inline)
+				MainView(onTapAbout: { isExpanded = true })
 				.navigationDestination(for: AppRoute.self) { value in
 					switch value {
 					case .todoCreate:
