@@ -66,7 +66,9 @@ struct TodoListView: View {
 					TodoCardView(
 						todo: item,
 						onToggleDone: { presenter.handleDoneTodo(item) },
-						onTap: { presenter.handleSelectTodo(item) }
+						onTap: { presenter.handleSelectTodo(item) },
+						onEdit: { presenter.handleSelectTodo(item) },
+						onDelete: { presenter.handleDeleteTodo(item) }
 					)
 				}
 			}
