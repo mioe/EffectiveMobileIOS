@@ -70,6 +70,16 @@ struct TodoListView: View {
 						onEdit: { presenter.handleSelectTodo(item) },
 						onDelete: { presenter.handleDeleteTodo(item) }
 					)
+					.swipeActions {
+						AppAction(
+							icon: "trash.fill",
+							tint: .red,
+							background: .secondary.opacity(0)
+						) { resetTrigger in
+							presenter.handleDeleteTodo(item)
+							resetTrigger.toggle()
+						}
+					}
 				}
 			}
 		}
