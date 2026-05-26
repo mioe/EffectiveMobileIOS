@@ -1,5 +1,7 @@
 # EffectiveMobileIOS
 
+#viper #coredata
+
 ## outputs
 
 | ios 18                                                            | ios 26                                                            |
