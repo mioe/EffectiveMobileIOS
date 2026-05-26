@@ -3,13 +3,13 @@
 import SwiftUI
 
 struct TodoCardView: View {
-	
+
 	let todo: TodoListItem
 	let onToggleDone: () -> Void
 	let onTap: () -> Void
-	
+
 	var body: some View {
-		Button{
+		Button {
 			onTap()
 		} label: {
 			HStack(alignment: .top, spacing: 8) {
@@ -36,12 +36,8 @@ struct TodoCardView: View {
 								.lineLimit(2)
 								.truncationMode(.tail)
 						}
-						Text(todo.createdAt, format: Date.VerbatimFormatStyle(
-							format: "\(day: .twoDigits)/\(month: .twoDigits)/\(year: .twoDigits)",
-							timeZone: .current,
-							calendar: .current
-						))
-						.font(.system(size: 12))
+						DateFormatedText(date: todo.createdAt)
+							.font(.system(size: 12))
 					}
 					.foregroundStyle(todo.isDone ? .secondary : .primary)
 					Spacer(minLength: 0)

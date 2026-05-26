@@ -4,23 +4,22 @@ import SwiftUI
 
 struct TodoFormView: View {
 	
-	@Environment(AppRouter.self) private var router
-
-	@State var title: String = ""
-	@State var content: String = ""
+	@StateObject var presenter: TodoFormPresenter
 
 	var body: some View {
 		ScrollView {
 			VStack(alignment: .leading, spacing: 16) {
 				VStack(alignment: .leading, spacing: 8) {
-					TextField("title", text: $title)
+					TextField("title", text: $presenter.name)
 						.font(.system(size: 34, weight: .bold))
-					Text("02/10/24")
-						.font(.system(size: 12))
-						.foregroundStyle(.secondary)
+					if let createdAt = presenter.createdAt {
+						DateFormatedText(date: createdAt)
+							.font(.system(size: 12))
+							.foregroundStyle(.secondary)
+					}
 				}
 
-				TextField("description", text: $content)
+				TextField("description", text: $presenter.text)
 					.font(.system(size: 16))
 			}
 		}

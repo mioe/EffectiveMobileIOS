@@ -24,14 +24,22 @@ struct ContentView: View {
 					repository: repository,
 					onTapAbout: { isExpanded = true }
 				)
-				//				.navigationDestination(for: AppRoute.self) { value in
-				//					switch value {
-				//					case .todoCreate:
-				//						TodoView()
-				//					case .todoEdit:
-				//						TodoView()
-				//					}
-				//				}
+				.navigationDestination(for: AppRoute.self) { route in
+					switch route {
+					case .todoFormCreate:
+						TodoFormRouter.build(
+							mode: .create,
+							appRouter: router,
+							repository: repository
+						)
+					case .todoFormEdit(let id):
+						TodoFormRouter.build(
+							mode: .edit(id),
+							appRouter: router,
+							repository: repository
+						)
+					}
+				}
 			}
 		}
 		.environment(router)
