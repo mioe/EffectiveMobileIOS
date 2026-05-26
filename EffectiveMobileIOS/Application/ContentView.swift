@@ -3,13 +3,15 @@
 import SwiftUI
 
 struct ContentView: View {
-	
+
 	@State private var router = AppRouter()
 	@State private var isExpanded: Bool = false
-	
+
+	private let repository: TodoRepositoryProtocol = TodoRepository()
+
 	var body: some View {
 		let isMenuEnabled = router.navigationPath.isEmpty
-		
+
 		AppSideMenuView(
 			isEnabled: isMenuEnabled,
 			isExpanded: $isExpanded
@@ -17,15 +19,19 @@ struct ContentView: View {
 			AboutMe()
 		} content: { progress in
 			NavigationStack(path: $router.navigationPath) {
-//				TodoFormView(onTapAbout: { isExpanded = true })
-//				.navigationDestination(for: AppRoute.self) { value in
-//					switch value {
-//					case .todoCreate:
-//						TodoView()
-//					case .todoEdit:
-//						TodoView()
-//					}
-//				}
+				TodoListRouter.build(
+					appRouter: router,
+					repository: repository,
+					onTapAbout: { isExpanded = true }
+				)
+				//				.navigationDestination(for: AppRoute.self) { value in
+				//					switch value {
+				//					case .todoCreate:
+				//						TodoView()
+				//					case .todoEdit:
+				//						TodoView()
+				//					}
+				//				}
 			}
 		}
 		.environment(router)

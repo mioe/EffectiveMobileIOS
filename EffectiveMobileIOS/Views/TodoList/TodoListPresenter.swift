@@ -10,7 +10,6 @@ protocol TodoListPresenterProtocol: AnyObject {
 	func todosDidChange()
 }
 
-
 @MainActor
 final class TodoListPresenter: TodoListPresenterProtocol, ObservableObject {
 	
@@ -65,15 +64,19 @@ final class TodoListPresenter: TodoListPresenterProtocol, ObservableObject {
 		}
 	}
 	
-	func handleTapCreate() {
+	func handleCreateTodo() {
 		router.goTodoCreate()
 	}
 	
-	func handleSelect(_ item: TodoListItem) {
+	func handleDoneTodo(_ item: TodoListItem) {
+		interactor.setTodoDone(id: item.id, isDone: !item.isDone)
+	}
+	
+	func handleSelectTodo(_ item: TodoListItem) {
 		router.goTodoEdit(id: item.id)
 	}
 	
-	func handleDelete(_ item: TodoListItem) {
+	func handleDeleteTodo(_ item: TodoListItem) {
 		interactor.deleteTodo(id: item.id)
 	}
 	
@@ -96,10 +99,6 @@ final class TodoListPresenter: TodoListPresenterProtocol, ObservableObject {
 	// MARK: - Helpers
 	
 	private static func pluralTask(_ count: Int) -> String {
-		let mod10 = count % 10
-		let mod100 = count % 100
-		if mod10 == 1, mod100 != 11 { return "задача" }
-		if (2...4).contains(mod10), !(12...14).contains(mod100) { return "задачи" }
-		return "задач"
+		return count == 1 ? "Todo" : "Todos"
 	}
 }

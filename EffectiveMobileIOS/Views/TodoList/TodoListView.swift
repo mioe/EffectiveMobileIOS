@@ -4,36 +4,14 @@ import SwiftUI
 
 struct TodoListView: View {
 
-	@Environment(AppRouter.self) private var router
+	@StateObject var presenter: TodoListPresenter
 
 	let onTapAbout: () -> Void
 
 	var body: some View {
 		VStack(spacing: 0) {
 			ScrollView {
-				VStack {
-					Text("MainView")
-						.foregroundStyle(.accent)
-					Button {
-						router.openTodo()
-					} label: {
-						Text("test")
-					}
-
-					HStack {
-						Image(.iEdit)
-							.resizable()
-							.frame(width: 16, height: 16)
-							.foregroundStyle(.accent)
-						Image(.iTrash)
-							.resizable()
-							.frame(width: 16, height: 16)
-							.foregroundStyle(.red)
-						Image(.iExport)
-							.resizable()
-							.frame(width: 16, height: 16)
-					}
-				}
+				BodyView()
 			}
 			.scrollClipDisabled()
 			.scrollIndicators(.hidden)
@@ -45,12 +23,51 @@ struct TodoListView: View {
 		}
 		.navigationTitle("Todos")
 		.navigationBarTitleDisplayMode(.inline)
+		.searchable(
+			text: $presenter.searchPrompt,
+			placement: .navigationBarDrawer(displayMode: .always),
+			prompt: "Search"
+		)
 		.toolbar {
 			ToolbarItem(placement: .topBarLeading) {
 				Button {
 					onTapAbout()
 				} label: {
 					Image(systemName: "questionmark")
+				}
+			}
+		}
+		.task {
+			presenter.viewDidAppear()
+		}
+		.alert(
+			"Err",
+			isPresented: Binding(
+				get: { presenter.errorMessage != nil },
+				set: { if !$0 { presenter.errorMessage = nil } }
+			),
+			presenting: presenter.errorMessage
+		) { _ in
+			Button("OK", role: .cancel) {}
+		} message: { message in
+			Text(message)
+		}
+	}
+
+	@ViewBuilder
+	private func BodyView() -> some View {
+		if presenter.items.isEmpty {
+			Text("Empty...")
+				.foregroundStyle(.secondary)
+				.padding(.vertical, 20)
+		} else {
+			CustomListDivider {
+				ForEach(presenter.items, id: \.id) { item in
+					TodoCardView(
+						todo: item,
+						onToggleDone: { presenter.handleDoneTodo(item) },
+						onTap: { presenter.handleSelectTodo(item) }
+					)
 				}
 			}
 		}
@@ -63,11 +80,11 @@ struct TodoListView: View {
 			HStack(spacing: 16) {
 				Rectangle().fill(.primary.opacity(0)).frame(width: 68)
 				Spacer(minLength: 0)
-				Text("7 Todos")
+				Text(presenter.todosCount)
 					.font(.system(size: 11))
 				Spacer(minLength: 0)
 				Button {
-					router.openTodo()
+					presenter.handleCreateTodo()
 				} label: {
 					Image(systemName: "square.and.pencil")
 						.foregroundStyle(.accent)
