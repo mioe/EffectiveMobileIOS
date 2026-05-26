@@ -17,15 +17,15 @@ struct ContentView: View {
 			AboutMe()
 		} content: { progress in
 			NavigationStack(path: $router.navigationPath) {
-				MainView(onTapAbout: { isExpanded = true })
-				.navigationDestination(for: AppRoute.self) { value in
-					switch value {
-					case .todoCreate:
-						TodoView()
-					case .todoEdit:
-						TodoView()
-					}
-				}
+//				TodoFormView(onTapAbout: { isExpanded = true })
+//				.navigationDestination(for: AppRoute.self) { value in
+//					switch value {
+//					case .todoCreate:
+//						TodoView()
+//					case .todoEdit:
+//						TodoView()
+//					}
+//				}
 			}
 		}
 		.environment(router)

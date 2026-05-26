@@ -5,8 +5,8 @@ import SwiftUI
 // MARK: - AppRoute
 
 enum AppRoute: Hashable {
-	case todoCreate  // /todo
-	case todoEdit  // /todo/{uuid}
+	case todoFormCreate  // /todo
+	case todoFormEdit(UUID)  // /todo/{uuid}
 }
 
 // MARK: - AppRouter
@@ -15,15 +15,15 @@ enum AppRoute: Hashable {
 @MainActor
 class AppRouter {
 	var navigationPath = NavigationPath()
-	
-	func openTodo() {
-		navigationPath.append(AppRoute.todoCreate)
+
+	func push(_ route: AppRoute) {
+		navigationPath.append(route)
 	}
-	
+
 	func pop() {
 		if !navigationPath.isEmpty { navigationPath.removeLast() }
 	}
-	
+
 	func popToRoot() {
 		navigationPath = NavigationPath()
 	}

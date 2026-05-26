@@ -4,6 +4,8 @@ import CoreData
 import Foundation
 
 class CoreDataManager {
+	
+	static let shared = CoreDataManager()
 
 	// MARK: - Core Data stack
 
@@ -36,5 +38,14 @@ class CoreDataManager {
 
 	var viewContext: NSManagedObjectContext {
 		persistentContainer.viewContext
+	}
+	
+	// MARK: - Helpers
+	
+	/// контекст с приватной очередью - для операций вне главного потока
+	func newBackgroundContext() -> NSManagedObjectContext {
+		let context = persistentContainer.newBackgroundContext()
+		context.mergePolicy = NSMergeByPropertyObjectTrumpMergePolicy
+		return context
 	}
 }

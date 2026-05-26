@@ -18,11 +18,11 @@ extension Todo {
 		return NSFetchRequest<Todo>(entityName: "Todo")
 	}
 
-	@NSManaged public var id: UUID
-	@NSManaged public var name: String
-	@NSManaged public var text: String?
-	@NSManaged public var createdAt: Date
-	@NSManaged public var done: Bool
+	@NSManaged nonisolated public var id: UUID
+	@NSManaged nonisolated public var name: String
+	@NSManaged nonisolated public var text: String?
+	@NSManaged nonisolated public var createdAt: Date
+	@NSManaged nonisolated public var done: Bool
 
 	public override nonisolated func awakeFromInsert() {
 		super.awakeFromInsert()
