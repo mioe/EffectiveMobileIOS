@@ -25,6 +25,11 @@
 			path = EffectiveMobileIOS;
 			sourceTree = "<group>";
 		};
+		377DCD292FC61087009C43E9 /* .docs */ = {
+			isa = PBXFileSystemSynchronizedRootGroup;
+			path = .docs;
+			sourceTree = "<group>";
+		};
 /* End PBXFileSystemSynchronizedRootGroup section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -44,6 +49,7 @@
 				3731BDD92FBCDFB00083C971 /* .editorconfig */,
 				3731BDDA2FBCDFB00083C971 /* .gitignore */,
 				3731BDDB2FBCDFB00083C971 /* README.md */,
+				377DCD292FC61087009C43E9 /* .docs */,
 				3731BDCD2FBCDF9B0083C971 /* EffectiveMobileIOS */,
 				3731BDCC2FBCDF9B0083C971 /* Products */,
 			);
@@ -74,6 +80,7 @@
 			);
 			fileSystemSynchronizedGroups = (
 				3731BDCD2FBCDF9B0083C971 /* EffectiveMobileIOS */,
+				377DCD292FC61087009C43E9 /* .docs */,
 			);
 			name = EffectiveMobileIOS;
 			packageProductDependencies = (
